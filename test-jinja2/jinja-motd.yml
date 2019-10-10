@@ -1,0 +1,23 @@
+---
+- name: Testing Jinja config
+  hosts: all
+  vars:
+    system_owner: rvasamsetty@rythmos.com
+  tasks:
+    - template:
+        src: motd.j2
+        dest: /etc/motd
+        owner: root
+        group: root
+        mode: 0644
+
+- name: Testing to open agent files and printing on screen
+  hosts: all
+  tasks:
+    - name: open a text file on console screen
+      command: cat /home/ansible/test.sh
+      register: read
+
+    - debug:
+        var: "{{ read.stdout_lines }}"
+        
